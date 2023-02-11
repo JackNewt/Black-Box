@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Flogger.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/Flogger.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Shoot",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "ShootPrep",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "WalkPrep",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Walking",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 29, 87 )
+
+[node name="Flogger" type="KinematicBody2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="FloggerSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.182812, 0.182813 )
+frames = SubResource( 14 )
+animation = "Walking"
+playing = true
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 34, 0 )
+shape = SubResource( 15 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[node name="AnimationTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="FloggerSprite" to="." method="_on_LinemanSprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
