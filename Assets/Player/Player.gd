@@ -14,9 +14,9 @@ func _physics_process(_delta):
 			var cannonball = Cannonball.instance()
 			var FX = get_node_or_null("/root/Game/FX")
 			if FX != null:
+				cannonball.position = position + nose.rotated($Aim.rotation)
+				cannonball.rotation = $Aim.rotation
 				FX.add_child(cannonball)
-				cannonball.position = position
-				cannonball.rotation = rotation
 
 	get_input()
 	
