@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var velocity = Vector2.ZERO
-var speed = 10.0
+var speed = 200.0
 var damage = 1
 
 
@@ -12,7 +12,6 @@ func _ready():
 
 
 func _physics_process(_delta):
-	print(velocity)
 	velocity = move_and_slide(velocity, Vector2.ZERO)
 	
 
